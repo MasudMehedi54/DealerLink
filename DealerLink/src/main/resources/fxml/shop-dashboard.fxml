@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  DealerLink - Shop Owner dashboard.
+  Controller : com.dealerlink.ui.controller.ShopDashboardController
+  Responsive :
+    * header title font & role chip follow window width
+    * "Requests & Quotations" SplitPane is SIDE-BY-SIDE on wide windows (>= 1250px)
+      and STACKED on narrow ones (orientation bound to window width)
+    * table heights are fractions of the window height
+    * FlowPane toolbars wrap onto a new line when the window gets narrow
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="760.0" prefWidth="1200.0" styleClass="dashboard-root"
+            stylesheets="@../css/theme.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dealerlink.ui.controller.ShopDashboardController">
+
+   <!-- ===================== Header ===================== -->
+   <top>
+      <HBox fx:id="header" alignment="CENTER_LEFT" spacing="14.0" styleClass="header-bar">
+         <children>
+            <VBox spacing="2.0">
+               <children>
+                  <Label fx:id="welcomeLabel" styleClass="header-title" text="🏬  Welcome back, Shop" />
+                  <Label fx:id="subtitleLabel" styleClass="header-subtitle" text="Find products, compare dealer offers and track deliveries" />
+               </children>
+            </VBox>
+            <Label fx:id="roleChip" styleClass="header-role-chip" text="SHOP OWNER" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="logoutButton" onAction="#handleLogout" styleClass="button-header" text="⎋  Logout" />
+         </children>
+      </HBox>
+   </top>
+
+   <!-- ===================== Tabs ===================== -->
+   <center>
+      <TabPane fx:id="tabs" tabClosingPolicy="UNAVAILABLE">
+         <BorderPane.margin>
+            <Insets bottom="14.0" left="20.0" right="20.0" top="14.0" />
+         </BorderPane.margin>
+         <tabs>
+
+            <!-- Tab 1: search products and request -->
+            <Tab text="🔍  Search &amp; Request">
+               <content>
+                  <VBox fx:id="searchTabBox" spacing="14.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="section-title" text="Browse Products" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <TextField fx:id="searchField" onAction="#handleSearch" promptText="🔎  Search product name or category (e.g. rice, pharmacy)" HBox.hgrow="ALWAYS" />
+                              <Button onAction="#handleSearch" styleClass="button-primary" text="Search" />
+                           </children>
+                        </HBox>
+                        <TableView fx:id="productTable" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="productNameCol" prefWidth="320.0" text="Product" />
+                              <TableColumn fx:id="productCategoryCol" prefWidth="200.0" text="Category" />
+                              <TableColumn fx:id="productUnitCol" prefWidth="120.0" text="Unit" />
+                           </columns>
+                        </TableView>
+                        <Separator />
+                        <Label styleClass="section-title" text="Request a Product" />
+                        <FlowPane fx:id="requestBar" alignment="CENTER_LEFT" hgap="12.0" vgap="10.0">
+                           <children>
+                              <Label text="Quantity needed:" />
+                              <Spinner fx:id="qtySpinner" editable="true" prefWidth="130.0" />
+                              <Button fx:id="requestButton" disable="true" onAction="#handleSubmitRequest" styleClass="button-primary" text="✅  Submit Request to Dealers" />
+                           </children>
+                        </FlowPane>
+                        <Label fx:id="searchStatus" wrapText="true" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+
+            <!-- Tab 2: requests and dealer quotations -->
+            <Tab text="📦  Requests &amp; Quotations">
+               <content>
+                  <VBox spacing="12.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <SplitPane fx:id="requestsSplit" dividerPositions="0.5" orientation="VERTICAL" styleClass="clean-split" VBox.vgrow="ALWAYS">
+                           <items>
+                              <VBox spacing="10.0" styleClass="split-section">
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                       <children>
+                                          <Label styleClass="section-title" text="Your Requests" />
+                                          <Region HBox.hgrow="ALWAYS" />
+                                          <Button onAction="#refreshRequests" styleClass="button-secondary" text="🔄  Refresh" />
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="requestTable" VBox.vgrow="ALWAYS">
+                                       <columns>
+                                          <TableColumn fx:id="reqIdCol" prefWidth="60.0" text="Req#" />
+                                          <TableColumn fx:id="reqProductCol" prefWidth="200.0" text="Product" />
+                                          <TableColumn fx:id="reqQtyCol" prefWidth="70.0" text="Qty" />
+                                          <TableColumn fx:id="reqStatusCol" prefWidth="100.0" text="Status" />
+                                          <TableColumn fx:id="reqQuotesCol" prefWidth="120.0" text="Quotes" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <VBox spacing="10.0" styleClass="split-section">
+                                 <children>
+                                    <Label styleClass="section-title" text="Dealer Quotations  (cheapest highlighted)" />
+                                    <TableView fx:id="quoteTable" VBox.vgrow="ALWAYS">
+                                       <columns>
+                                          <TableColumn fx:id="quoteDealerCol" prefWidth="200.0" text="Dealer" />
+                                          <TableColumn fx:id="quotePriceCol" prefWidth="120.0" text="Price" />
+                                          <TableColumn fx:id="quoteDaysCol" prefWidth="110.0" text="Delivery (days)" />
+                                          <TableColumn fx:id="quoteStatusCol" prefWidth="110.0" text="Status" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </items>
+                        </SplitPane>
+                        <FlowPane alignment="CENTER_LEFT" hgap="12.0" vgap="10.0">
+                           <children>
+                              <Button onAction="#handleAcceptQuotation" styleClass="button-primary" text="🏆  Accept Quotation &amp; Place Order" />
+                              <Button fx:id="weatherButton" onAction="#handleCheckWeather" styleClass="button-secondary" text="☀  Check Area Weather" />
+                           </children>
+                        </FlowPane>
+                        <Label fx:id="weatherLabel" managed="false" styleClass="weather-info" visible="false" wrapText="true" />
+                        <Label fx:id="requestsStatus" wrapText="true" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+
+            <!-- Tab 3: orders and delivery -->
+            <Tab text="🚚  Orders &amp; Delivery">
+               <content>
+                  <VBox spacing="14.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <Label styleClass="section-title" text="Your Orders" />
+                        <FlowPane alignment="CENTER_LEFT" hgap="10.0" vgap="8.0">
+                           <children>
+                              <Button onAction="#refreshOrders" styleClass="button-secondary" text="🔄  Refresh" />
+                              <Button onAction="#handleExportOrders" styleClass="button-secondary" text="⬇  Export JSON" />
+                              <Label fx:id="exportStatus" />
+                           </children>
+                        </FlowPane>
+                        <TableView fx:id="orderTable" VBox.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="orderIdCol" prefWidth="70.0" text="Order#" />
+                              <TableColumn fx:id="orderProductCol" prefWidth="220.0" text="Product" />
+                              <TableColumn fx:id="orderDealerCol" prefWidth="200.0" text="Dealer" />
+                              <TableColumn fx:id="orderPriceCol" prefWidth="120.0" text="Price" />
+                              <TableColumn fx:id="orderStatusCol" prefWidth="120.0" text="Order Status" />
+                           </columns>
+                        </TableView>
+                        <Label fx:id="deliveryInfo" styleClass="delivery-info" text="Select an order above to see its live delivery status." wrapText="true" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+
+   <!-- ===================== Notifications ===================== -->
+   <bottom>
+      <Label fx:id="notificationBar" managed="false" maxWidth="1.7976931348623157E308" styleClass="notification-bar" visible="false" wrapText="true">
+         <BorderPane.margin>
+            <Insets bottom="14.0" left="20.0" right="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </bottom>
+</BorderPane>

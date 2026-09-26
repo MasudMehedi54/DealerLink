@@ -1,0 +1,90 @@
+{
+  "settings": {
+    "appName": "DealerLink",
+    "currencySymbol": "৳",
+    "lowStockThreshold": 10,
+    "orderMonitorIntervalSeconds": 10,
+    "inventoryCheckIntervalSeconds": 30,
+    "weatherApiUrl": "https://api.open-meteo.com/v1/forecast",
+    "geocodingApiUrl": "https://geocoding-api.open-meteo.com/v1/search"
+  },
+
+  "users": [
+    {
+      "username": "shop1",
+      "password": "1234",
+      "role": "SHOP",
+      "fullName": "City Grocery Mart",
+      "location": "Khulna",
+      "latitude": 22.8456,
+      "longitude": 89.5403
+    },
+    {
+      "username": "dealer1",
+      "password": "1234",
+      "role": "DEALER",
+      "fullName": "Northern Distributors",
+      "location": "Khulna",
+      "latitude": 22.8100,
+      "longitude": 89.5600
+    },
+    {
+      "username": "dealer2",
+      "password": "1234",
+      "role": "DEALER",
+      "fullName": "Sundarban Traders",
+      "location": "Jashore",
+      "latitude": 23.1667,
+      "longitude": 89.2083
+    }
+  ],
+
+  "products": [
+    { "name": "Rice (Miniket) 25kg", "category": "Grocery",     "unit": "bag" },
+    { "name": "Cooking Oil 5L",      "category": "Grocery",     "unit": "can" },
+    { "name": "Lentils (Masoor) 1kg","category": "Grocery",     "unit": "pack" },
+    { "name": "Paracetamol 500mg",   "category": "Pharmacy",    "unit": "box" },
+    { "name": "Hand Sanitizer 500ml","category": "Pharmacy",    "unit": "bottle" },
+    { "name": "LED Bulb 9W",         "category": "Electronics", "unit": "pcs" },
+    { "name": "Extension Board 4-Port", "category": "Electronics", "unit": "pcs" }
+  ],
+
+  "inventory": [
+    { "dealerUsername": "dealer1", "productName": "Rice (Miniket) 25kg",  "quantity": 100, "unitPrice": 1450.00 },
+    { "dealerUsername": "dealer1", "productName": "Cooking Oil 5L",       "quantity": 60,  "unitPrice": 850.00 },
+    { "dealerUsername": "dealer1", "productName": "Lentils (Masoor) 1kg", "quantity": 8,   "unitPrice": 135.00 },
+    { "dealerUsername": "dealer2", "productName": "Rice (Miniket) 25kg",  "quantity": 40,  "unitPrice": 1420.00 },
+    { "dealerUsername": "dealer2", "productName": "Paracetamol 500mg",    "quantity": 200, "unitPrice": 45.00 },
+    { "dealerUsername": "dealer2", "productName": "LED Bulb 9W",          "quantity": 500, "unitPrice": 120.00 },
+    { "dealerUsername": "dealer2", "productName": "Hand Sanitizer 500ml", "quantity": 5,   "unitPrice": 180.00 }
+  ],
+
+  "cities": [
+    { "name": "Dhaka",       "latitude": 23.8103, "longitude": 90.4125 },
+    { "name": "Chattogram",  "latitude": 22.3569, "longitude": 91.7832 },
+    { "name": "Chittagong",  "latitude": 22.3569, "longitude": 91.7832 },
+    { "name": "Khulna",      "latitude": 22.8456, "longitude": 89.5403 },
+    { "name": "Rajshahi",    "latitude": 24.3745, "longitude": 88.6042 },
+    { "name": "Sylhet",      "latitude": 24.8949, "longitude": 91.8687 },
+    { "name": "Barishal",    "latitude": 22.7010, "longitude": 90.3535 },
+    { "name": "Barisal",     "latitude": 22.7010, "longitude": 90.3535 },
+    { "name": "Rangpur",     "latitude": 25.7439, "longitude": 89.2752 },
+    { "name": "Mymensingh",  "latitude": 24.7471, "longitude": 90.4203 },
+    { "name": "Comilla",     "latitude": 23.4607, "longitude": 91.1809 },
+    { "name": "Cumilla",     "latitude": 23.4607, "longitude": 91.1809 },
+    { "name": "Jashore",     "latitude": 23.1667, "longitude": 89.2083 },
+    { "name": "Jessore",     "latitude": 23.1667, "longitude": 89.2083 },
+    { "name": "Gazipur",     "latitude": 23.9999, "longitude": 90.4203 },
+    { "name": "Narayanganj", "latitude": 23.6238, "longitude": 90.5000 },
+    { "name": "Bogura",      "latitude": 24.8465, "longitude": 89.3776 },
+    { "name": "Cox's Bazar", "latitude": 21.4272, "longitude": 92.0058 },
+    { "name": "Satkhira",    "latitude": 22.7185, "longitude": 89.0705 },
+    { "name": "Bagerhat",    "latitude": 22.6516, "longitude": 89.7859 },
+    { "name": "Kushtia",     "latitude": 23.9013, "longitude": 89.1204 },
+    { "name": "Dinajpur",    "latitude": 25.6217, "longitude": 88.6355 },
+    { "name": "Noakhali",    "latitude": 22.8696, "longitude": 91.0995 },
+    { "name": "Tangail",     "latitude": 24.2513, "longitude": 89.9167 },
+    { "name": "Pabna",       "latitude": 24.0064, "longitude": 89.2372 },
+    { "name": "Faridpur",    "latitude": 23.6070, "longitude": 89.8429 }
+  ]
+}

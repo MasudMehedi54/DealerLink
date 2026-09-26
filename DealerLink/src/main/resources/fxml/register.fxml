@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  DealerLink - Register screen.
+  Controller : com.dealerlink.ui.controller.RegisterController
+  Responsive : brand panel = 38% of window width (hidden below 1000px); the form
+               scrolls on short windows; card width & spacing follow the window.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="root" prefHeight="720.0" prefWidth="1100.0" styleClass="auth-root"
+      stylesheets="@../css/theme.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.dealerlink.ui.controller.RegisterController">
+   <fx:define>
+      <ToggleGroup fx:id="roleGroup" />
+   </fx:define>
+   <children>
+      <VBox fx:id="brandPanel" alignment="CENTER_LEFT" prefWidth="420.0" spacing="18.0" styleClass="brand-panel">
+         <padding>
+            <Insets bottom="48.0" left="56.0" right="48.0" top="48.0" />
+         </padding>
+         <children>
+            <Label styleClass="brand-logo" text="📝" />
+            <Label fx:id="brandTitle" styleClass="brand-title" text="Join DealerLink" />
+            <Label styleClass="brand-tagline" text="Shop owners find the best price. Dealers find new customers. Create your free account in under a minute." wrapText="true" />
+         </children>
+      </VBox>
+
+      <ScrollPane fx:id="scroll" fitToHeight="true" fitToWidth="true" styleClass="auth-scroll" HBox.hgrow="ALWAYS">
+         <content>
+            <StackPane fx:id="formSide" minHeight="-Infinity">
+               <padding>
+                  <Insets bottom="28.0" left="24.0" right="24.0" top="28.0" />
+               </padding>
+               <children>
+                  <VBox fx:id="card" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="420.0" spacing="12.0" styleClass="card">
+                     <children>
+                        <Label fx:id="cardTitle" styleClass="card-title" text="Create your account" />
+                        <Label styleClass="app-subtitle" text="Register as a shop owner or a dealer" />
+                        <Label styleClass="field-label" text="I am registering as" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <ToggleButton fx:id="shopToggle" maxWidth="1.7976931348623157E308" selected="true" styleClass="toggle-pill" text="🏬  Shop Owner" toggleGroup="$roleGroup" HBox.hgrow="ALWAYS" />
+                              <ToggleButton fx:id="dealerToggle" maxWidth="1.7976931348623157E308" styleClass="toggle-pill" text="🚚  Dealer" toggleGroup="$roleGroup" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <Label styleClass="field-label" text="👤  Username" />
+                        <TextField fx:id="usernameField" promptText="Choose a username" />
+                        <Label styleClass="field-label" text="🔒  Password" />
+                        <PasswordField fx:id="passwordField" promptText="Choose a password (min 4 characters)" />
+                        <Label styleClass="field-label" text="🏷  Full Name / Shop Name" />
+                        <TextField fx:id="fullNameField" promptText="Your name or shop/business name" />
+                        <Label styleClass="field-label" text="📍  Location (city)" />
+                        <TextField fx:id="locationField" promptText="City, e.g. Khulna" />
+                        <Button defaultButton="true" maxWidth="1.7976931348623157E308" onAction="#handleRegister" styleClass="button-primary" text="Create Account" />
+                        <Button maxWidth="1.7976931348623157E308" onAction="#goToLogin" styleClass="button-ghost" text="← Back to Login" />
+                        <Label fx:id="statusLabel" styleClass="error-text" wrapText="true" />
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+         </content>
+      </ScrollPane>
+   </children>
+</HBox>
