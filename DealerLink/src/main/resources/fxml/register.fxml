@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  DealerLink - Register screen (mirrors ui/RegisterScreen.java).
+  Place in: src/main/resources/fxml/register.fxml   (uses ../css/theme.css)
+
+  Responsiveness: root GridPane with PERCENT constraints,
+    columns 26% | 48% | 26% of the window WIDTH  -> form card is 48% wide
+    rows    16% | 84%       of the window HEIGHT -> header / form area
+  The form area is a ScrollPane, so on short windows the card scrolls instead of
+  being cut off.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane fx:id="root" prefHeight="680.0" prefWidth="1000.0"
+          style="-fx-background-color: linear-gradient(to bottom right, #EFF6FF, #F1F5F9);"
+          stylesheets="@../css/theme.css"
+          xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <fx:define>
+      <ToggleGroup fx:id="roleGroup" />
+   </fx:define>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="26.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="430.0" percentWidth="48.0" />
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="26.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints percentHeight="16.0" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints percentHeight="84.0" valignment="TOP" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <VBox fx:id="headerBox" alignment="CENTER" spacing="6.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0">
+         <children>
+            <Label fx:id="title" style="-fx-font-size: 24px;" styleClass="app-title" text="📝 Create Your Account" />
+            <Label fx:id="subtitle" styleClass="app-subtitle" text="Join DealerLink as a shop owner or a dealer" />
+         </children>
+      </VBox>
+
+      <ScrollPane fx:id="scroll" fitToWidth="true" hbarPolicy="NEVER"
+                  style="-fx-background-color: transparent; -fx-background: transparent; -fx-text-background-color: #1E293B;"
+                  GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <content>
+            <StackPane>
+               <padding>
+                  <Insets bottom="16.0" left="14.0" right="14.0" top="4.0" />
+               </padding>
+               <children>
+            <VBox fx:id="card" maxWidth="1.7976931348623157E308" spacing="16.0" styleClass="card">
+               <children>
+                  <GridPane fx:id="form" hgap="12.0" maxWidth="1.7976931348623157E308" vgap="14.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="100.0" />
+                     </columnConstraints>
+                     <children>
+                        <Label text="I am registering as:" GridPane.rowIndex="0" />
+                        <HBox fx:id="roleBox" spacing="10.0" GridPane.rowIndex="1">
+                           <children>
+                              <ToggleButton fx:id="shopToggle" maxWidth="1.7976931348623157E308" selected="true" styleClass="toggle-pill" text="🏬  Shop Owner" toggleGroup="$roleGroup" HBox.hgrow="ALWAYS" />
+                              <ToggleButton fx:id="dealerToggle" maxWidth="1.7976931348623157E308" styleClass="toggle-pill" text="🚚  Dealer" toggleGroup="$roleGroup" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <Label text="👤 Username" GridPane.rowIndex="2" />
+                        <TextField fx:id="username" maxWidth="1.7976931348623157E308" promptText="Choose a username" GridPane.rowIndex="3" />
+                        <Label text="🔒 Password" GridPane.rowIndex="4" />
+                        <PasswordField fx:id="password" maxWidth="1.7976931348623157E308" promptText="Choose a password (min 4 characters)" GridPane.rowIndex="5" />
+                        <Label text="🏷 Full Name / Shop Name" GridPane.rowIndex="6" />
+                        <TextField fx:id="fullName" maxWidth="1.7976931348623157E308" promptText="Your name or shop/business name" GridPane.rowIndex="7" />
+                        <Label text="📍 Location" GridPane.rowIndex="8" />
+                        <TextField fx:id="location" maxWidth="1.7976931348623157E308" promptText="City, e.g. Khulna" GridPane.rowIndex="9" />
+                     </children>
+                  </GridPane>
+                  <Button fx:id="createBtn" defaultButton="true" maxWidth="1.7976931348623157E308" styleClass="button-primary" text="Create Account" />
+                  <Button fx:id="backBtn" maxWidth="1.7976931348623157E308" styleClass="button-ghost" text="← Back to Login" />
+                  <Label fx:id="status" minHeight="-Infinity" styleClass="error-text" wrapText="true" />
+               </children>
+            </VBox>
+               </children>
+            </StackPane>
+         </content>
+      </ScrollPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+   </padding>
+</GridPane>
