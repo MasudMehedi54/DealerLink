@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  DealerLink - Login screen (mirrors ui/LoginScreen.java).
+  Place in: src/main/resources/fxml/login.fxml   (uses ../css/theme.css)
+
+  Responsiveness: the root GridPane divides the window with PERCENT constraints,
+    columns 30% | 40% | 30% of the window WIDTH  -> card is always 40% wide
+    rows    28% | 66% | 6%  of the window HEIGHT -> header / card / bottom margin
+  so every region grows and shrinks with the window. Open in Scene Builder and
+  select the GridPane > Layout to see/edit the constraints.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane fx:id="root" prefHeight="680.0" prefWidth="1000.0"
+          style="-fx-background-color: linear-gradient(to bottom right, #EFF6FF, #F1F5F9);"
+          stylesheets="@../css/theme.css"
+          xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="320.0" percentWidth="40.0" />
+      <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints percentHeight="28.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+      <RowConstraints percentHeight="66.0" valignment="TOP" vgrow="SOMETIMES" />
+      <RowConstraints percentHeight="6.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <!-- Header: logo + subtitle -->
+      <VBox fx:id="headerBox" alignment="CENTER" spacing="6.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0">
+         <children>
+            <Label fx:id="logo" styleClass="app-title" text="🔗 DealerLink" />
+            <Label fx:id="subtitle" styleClass="app-subtitle" text="Connecting shop owners with product dealers, instantly" />
+         </children>
+         <GridPane.margin>
+            <Insets bottom="22.0" />
+         </GridPane.margin>
+      </VBox>
+
+      <!-- Card -->
+      <VBox fx:id="card" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" spacing="16.0" styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <GridPane fx:id="form" hgap="12.0" maxWidth="1.7976931348623157E308" vgap="14.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" percentWidth="100.0" />
+               </columnConstraints>
+               <children>
+                  <Label fx:id="userLabel" text="👤 Username" GridPane.rowIndex="0" />
+                  <TextField fx:id="usernameField" maxWidth="1.7976931348623157E308" prefColumnCount="18" promptText="Enter your username" GridPane.rowIndex="1" />
+                  <Label fx:id="passLabel" text="🔒 Password" GridPane.rowIndex="2" />
+                  <StackPane fx:id="passwordStack" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3">
+                     <children>
+                        <PasswordField fx:id="passwordField" promptText="Enter your password" />
+                        <TextField fx:id="passwordVisible" managed="false" promptText="Enter your password" visible="false" />
+                     </children>
+                  </StackPane>
+                  <CheckBox fx:id="showPassword" styleClass="hint-text" text="Show password" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+            <Button fx:id="loginBtn" defaultButton="true" maxWidth="1.7976931348623157E308" styleClass="button-primary" text="Log In" />
+            <Button fx:id="registerBtn" maxWidth="1.7976931348623157E308" styleClass="button-secondary" text="Create a New Account" />
+            <Label fx:id="statusLabel" styleClass="error-text" />
+            <Label fx:id="demoHint" minHeight="-Infinity" styleClass="hint-text" textAlignment="CENTER" text="Demo accounts  ·  Shop: shop1 / 1234  ·  Dealer: dealer1 / 1234 or dealer2 / 1234" wrapText="true" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</GridPane>
